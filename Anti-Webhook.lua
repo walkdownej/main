@@ -11,8 +11,7 @@ local m = {
     "webhook spy caught: your parents regret having you",
     "webhook user detected: worthless maggot exterminated",
     "regui detected: script kiddie trash eliminated forever",
-    "regui folder found: pathetic cheater destroyed completely",
-    "unauthorized HttpGet detected: script kiddie trash terminated"
+    "regui folder found: pathetic cheater destroyed completely"
 }
 
 -- Function to kick the player with a random message
@@ -42,10 +41,6 @@ if not identifyexecutor then
     print("identifyexecutor is NOT supported.")
     kickPlayer("Missing identifyexecutor")
 end
-if not game.HttpGet then
-    print("HttpGet is NOT supported.")
-    kickPlayer("Missing HttpGet")
-end
 
 local o = request
 local blocked = {
@@ -54,11 +49,6 @@ local blocked = {
     "anylink",
     "githubdetector",
     "pastebindetector"
-}
-
--- Whitelist for allowed HttpGet URLs (add any legitimate URLs used by the script)
-local allowedHttpGetUrls = {
-    "https://thumbnails.roproxy.com/v1/users/avatar-headshot" -- Used for avatar thumbnail
 }
 
 -- Webhook reporting function
@@ -77,7 +67,7 @@ local function s(d: string): ()
     
     local embed = {
         title = "WEBHOOK SPY DETECTED",
-        description = "Unauthorized activity detected and blocked",
+        description = "Unauthorized webhook access attempt detected and blocked",
         color = 16711680,
         thumbnail = {
             url = img
@@ -125,19 +115,6 @@ local function disableClipboard(): ()
         setclipboard = function() end
     end
 end
-
--- Hook HttpGet to detect unauthorized calls
-local originalHttpGet = game.HttpGet
-hookfunction(game.HttpGet, function(self, url, ...)
-    for _, allowedUrl in ipairs(allowedHttpGetUrls) do
-        if string.find(url, allowedUrl) then
-            return originalHttpGet(self, url, ...)
-        end
-    end
-    disableClipboard()
-    s("Unauthorized HttpGet Call: " .. url)
-    kickPlayer("Unauthorized HttpGet Call: " .. url)
-end)
 
 -- Continuous monitoring loop
 spawn(function()
