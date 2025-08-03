@@ -86,7 +86,7 @@ local function s(d: string): ()
             }
         },
         footer = {
-            text = "Developed by Norgumi"
+            text = "Developed by Lyez"
         }
     }
     
